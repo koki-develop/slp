@@ -5,25 +5,41 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/spf13/cobra"
 )
 
 var (
-	flagBeep bool
+	flagSecond bool
+	flagMinute bool
+	flagHour   bool
+	flagBeep   bool
 )
 
 var rootCmd = &cobra.Command{
-	Use:          "slp [duration]",
+	Use:          "slp [time]",
 	Short:        "sleep command with rich progress bar",
 	Long:         "sleep command with rich progress bar.",
 	Args:         cobra.ExactArgs(1),
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		d, err := strconv.ParseFloat(args[0], 64)
+		t, err := strconv.ParseFloat(args[0], 64)
 		if err != nil {
 			return err
+		}
+
+		var d time.Duration
+		switch {
+		case flagSecond:
+			d = time.Duration(t * float64(time.Second))
+		case flagMinute:
+			d = time.Duration(t * float64(time.Minute))
+		case flagHour:
+			d = time.Duration(t * float64(time.Hour))
+		default:
+			d = time.Duration(t * float64(time.Second))
 		}
 
 		m := newModel(d)
@@ -52,6 +68,10 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().SortFlags = false
+
+	rootCmd.Flags().BoolVar(&flagSecond, "second", false, "set the time unit to seconds (default)")
+	rootCmd.Flags().BoolVar(&flagMinute, "minute", false, "set the time unit to minutes")
+	rootCmd.Flags().BoolVar(&flagHour, "hour", false, "set the time unit to hours")
 
 	rootCmd.Flags().BoolVarP(&flagBeep, "beep", "b", false, "beep when finished sleeping")
 }

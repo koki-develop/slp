@@ -24,9 +24,9 @@ type model struct {
 	keymap   keymap
 }
 
-func newModel(t float64) *model {
+func newModel(d time.Duration) *model {
 	return &model{
-		duration: time.Duration(t*1000) * time.Millisecond,
+		duration: d,
 		abort:    false,
 		progress: progress.New(progress.WithDefaultGradient()),
 		keymap: keymap{
