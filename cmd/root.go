@@ -15,7 +15,7 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:          "slp",
+	Use:          "slp [duration]",
 	Short:        "sleep command with rich progress bar",
 	Long:         "sleep command with rich progress bar.",
 	Args:         cobra.ExactArgs(1),
