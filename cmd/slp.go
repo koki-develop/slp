@@ -8,6 +8,11 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 )
 
+const (
+	defaultWidth    int     = 40
+	maxWidthPercent float64 = 0.8
+)
+
 type keymap struct {
 	Abort key.Binding
 }
@@ -68,6 +73,14 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.abort = true
 			return m, tea.Quit
 		}
+	case tea.WindowSizeMsg:
+		maxWidth := int(float64(msg.Width) * maxWidthPercent)
+		if m.progress.Width > maxWidth {
+			m.progress.Width = maxWidth
+		} else {
+			m.progress.Width = defaultWidth
+		}
+		return m, nil
 	}
 
 	return m, nil
