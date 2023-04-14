@@ -19,6 +19,7 @@ jobs:
         with:
           path: ./tapes/demo.tape
           token: ${{ secrets.GITHUB_TOKEN }}
+      - run: go install github.com/charmbracelet/vhs@latest
       - name: update gif
         run: |
           for t in ./tapes/*; do
