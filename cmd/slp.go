@@ -88,11 +88,7 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 	case tea.WindowSizeMsg:
 		maxWidth := int(float64(msg.Width) * maxWidthPercent)
-		if m.progress.Width > maxWidth {
-			m.progress.Width = maxWidth
-		} else {
-			m.progress.Width = defaultWidth
-		}
+		m.progress.Width = min(maxWidth, defaultWidth)
 		return m, nil
 	}
 
@@ -109,4 +105,12 @@ func (m *model) tick() tea.Cmd {
 	return tea.Tick(time.Millisecond, func(t time.Time) tea.Msg {
 		return tickMsg{}
 	})
+}
+
+func min(a, b int) int {
+	if a > b {
+		return b
+	} else {
+		return a
+	}
 }
