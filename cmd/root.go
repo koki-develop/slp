@@ -1,10 +1,11 @@
 package cmd
 
 import (
-	"fmt"
+	"errors"
 	"os"
 	"strconv"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/spf13/cobra"
 )
 
@@ -16,7 +17,17 @@ var rootCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		fmt.Println(d)
+
+		m := newModel(d)
+		p := tea.NewProgram(m)
+
+		if _, err = p.Run(); err != nil {
+			return err
+		}
+		if m.abort {
+			return errors.New("abort")
+		}
+
 		return nil
 	},
 }
