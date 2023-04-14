@@ -40,7 +40,9 @@ var rootCmd = &cobra.Command{
 			base = time.Hour
 		}
 
-		m := newModel(time.Duration(t * float64(base)))
+		m := newModel(modelConfig{
+			Duration: time.Duration(t * float64(base)),
+		})
 		p := tea.NewProgram(m)
 
 		if _, err = p.Run(); err != nil {

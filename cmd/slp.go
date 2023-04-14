@@ -29,11 +29,15 @@ type model struct {
 	keymap   keymap
 }
 
-func newModel(d time.Duration) *model {
+type modelConfig struct {
+	Duration time.Duration
+}
+
+func newModel(cfg modelConfig) *model {
 	return &model{
-		duration: d,
+		duration: cfg.Duration,
 		abort:    false,
-		progress: progress.New(progress.WithDefaultGradient()),
+		progress: progress.New(),
 		keymap: keymap{
 			Abort: key.NewBinding(key.WithKeys("ctrl+c")),
 		},
