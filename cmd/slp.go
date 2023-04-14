@@ -32,13 +32,19 @@ type model struct {
 type modelConfig struct {
 	Duration time.Duration
 	Color    string
+	Gradient []string
 }
 
 func newModel(cfg modelConfig) *model {
+	opts := []progress.Option{progress.WithSolidFill(cfg.Color)}
+	if len(cfg.Gradient) == 2 {
+		opts = append(opts, progress.WithGradient(cfg.Gradient[0], cfg.Gradient[1]))
+	}
+
 	return &model{
 		duration: cfg.Duration,
 		abort:    false,
-		progress: progress.New(progress.WithSolidFill(cfg.Color)),
+		progress: progress.New(opts...),
 		keymap: keymap{
 			Abort: key.NewBinding(key.WithKeys("ctrl+c")),
 		},

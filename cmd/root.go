@@ -12,11 +12,12 @@ import (
 )
 
 var (
-	flagSecond bool
-	flagMinute bool
-	flagHour   bool
-	flagBeep   bool
-	flagColor  string
+	flagSecond   bool
+	flagMinute   bool
+	flagHour     bool
+	flagBeep     bool
+	flagColor    string
+	flagGradient []string
 )
 
 var rootCmd = &cobra.Command{
@@ -41,10 +42,17 @@ var rootCmd = &cobra.Command{
 			base = time.Hour
 		}
 
-		m := newModel(modelConfig{
-			Duration: time.Duration(t * float64(base)),
-			Color:    flagColor,
-		})
+		cfg := modelConfig{Duration: time.Duration(t * float64(base))}
+		if cmd.Flags().Changed("color") {
+			cfg.Color = flagColor
+		} else {
+			if len(flagGradient) != 2 {
+				return errors.New("gradient must have only two colors")
+			}
+			cfg.Gradient = flagGradient
+		}
+
+		m := newModel(cfg)
 		p := tea.NewProgram(m)
 
 		if _, err = p.Run(); err != nil {
@@ -77,5 +85,6 @@ func init() {
 
 	rootCmd.Flags().BoolVarP(&flagBeep, "beep", "b", false, "beep when finished sleeping")
 
-	rootCmd.Flags().StringVar(&flagColor, "color", "#00ADD8", "color of progress bar")
+	rootCmd.Flags().StringVar(&flagColor, "color", "", "color of progress bar")
+	rootCmd.Flags().StringSliceVar(&flagGradient, "gradient", []string{"#005B72", "#1DD2FF"}, "apply a gradient between the two colors")
 }
