@@ -12,7 +12,7 @@ Sleep 5s
 Ctrl+l
 Show
 
-Type "slp 3 --gradient #000000,#ffffff" Sleep 500ms Enter
+Type 'slp 3 --gradient "#000000,#ffffff"' Sleep 500ms Enter
 
 Sleep 3s
 Sleep 2s
