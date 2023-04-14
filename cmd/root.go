@@ -10,8 +10,10 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:  "slp",
-	Args: cobra.ExactArgs(1),
+	Use:   "slp",
+	Short: "sleep command with rich progress bar",
+	Long:  "sleep command with rich progress bar.",
+	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		d, err := strconv.ParseFloat(args[0], 64)
 		if err != nil {
