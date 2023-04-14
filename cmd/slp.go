@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"time"
+
 	"github.com/charmbracelet/bubbles/key"
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -14,13 +16,15 @@ var (
 )
 
 type model struct {
-	abort  bool
-	keymap keymap
+	duration time.Duration
+	abort    bool
+	keymap   keymap
 }
 
-func newModel(d float64) *model {
+func newModel(t float64) *model {
 	return &model{
-		abort: false,
+		duration: time.Duration(t*1000) * time.Millisecond,
+		abort:    false,
 		keymap: keymap{
 			Abort: key.NewBinding(key.WithKeys("ctrl+c")),
 		},
@@ -28,15 +32,19 @@ func newModel(d float64) *model {
 }
 
 func (m *model) Init() tea.Cmd {
-	return nil
+	return m.sleep()
 }
 
 func (m *model) View() string {
 	return "slp"
 }
 
+type sleptMsg struct{}
+
 func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
+	case sleptMsg:
+		return m, tea.Quit
 	case tea.KeyMsg:
 		switch {
 		case key.Matches(msg, m.keymap.Abort):
@@ -46,4 +54,10 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	}
 
 	return m, nil
+}
+
+func (m *model) sleep() tea.Cmd {
+	return tea.Tick(m.duration, func(t time.Time) tea.Msg {
+		return sleptMsg{}
+	})
 }
