@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"runtime/debug"
 	"strconv"
 	"time"
 
@@ -12,6 +13,8 @@ import (
 )
 
 var (
+	version string
+
 	flagSecond   bool
 	flagMinute   bool
 	flagHour     bool
@@ -77,6 +80,13 @@ func Execute() {
 }
 
 func init() {
+	if version == "" {
+		if info, ok := debug.ReadBuildInfo(); ok {
+			version = info.Main.Version
+		}
+	}
+	rootCmd.Version = version
+
 	rootCmd.Flags().SortFlags = false
 
 	rootCmd.Flags().BoolVar(&flagSecond, "second", false, "set the time unit to seconds (default)")
