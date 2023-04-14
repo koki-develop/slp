@@ -30,19 +30,17 @@ var rootCmd = &cobra.Command{
 			return err
 		}
 
-		var d time.Duration
+		base := time.Second
 		switch {
 		case flagSecond:
-			d = time.Duration(t * float64(time.Second))
+			base = time.Second
 		case flagMinute:
-			d = time.Duration(t * float64(time.Minute))
+			base = time.Minute
 		case flagHour:
-			d = time.Duration(t * float64(time.Hour))
-		default:
-			d = time.Duration(t * float64(time.Second))
+			base = time.Hour
 		}
 
-		m := newModel(d)
+		m := newModel(time.Duration(t * float64(base)))
 		p := tea.NewProgram(m)
 
 		if _, err = p.Run(); err != nil {
