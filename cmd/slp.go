@@ -6,10 +6,11 @@ import (
 	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/bubbles/progress"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/mattn/go-runewidth"
 )
 
 const (
-	defaultWidth    int     = 40
+	defaultWidth    int     = 80
 	maxWidthPercent float64 = 0.8
 )
 
@@ -52,6 +53,7 @@ func newModel(cfg modelConfig) *model {
 }
 
 func (m *model) Init() tea.Cmd {
+	runewidth.DefaultCondition.EastAsianWidth = false
 	m.startAt = time.Now()
 	return tea.Batch(
 		m.sleep(),
