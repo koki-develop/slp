@@ -2,11 +2,16 @@ package cmd
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"strconv"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/spf13/cobra"
+)
+
+var (
+	flagBeep bool
 )
 
 var rootCmd = &cobra.Command{
@@ -31,6 +36,9 @@ var rootCmd = &cobra.Command{
 			return errors.New("abort")
 		}
 
+		if flagBeep {
+			fmt.Print("\a")
+		}
 		return nil
 	},
 }
@@ -40,4 +48,10 @@ func Execute() {
 	if err != nil {
 		os.Exit(1)
 	}
+}
+
+func init() {
+	rootCmd.Flags().SortFlags = false
+
+	rootCmd.Flags().BoolVarP(&flagBeep, "beep", "b", false, "beep when finished sleeping")
 }
