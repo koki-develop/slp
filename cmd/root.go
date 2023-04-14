@@ -82,9 +82,11 @@ func init() {
 	rootCmd.Flags().BoolVar(&flagSecond, "second", false, "set the time unit to seconds (default)")
 	rootCmd.Flags().BoolVar(&flagMinute, "minute", false, "set the time unit to minutes")
 	rootCmd.Flags().BoolVar(&flagHour, "hour", false, "set the time unit to hours")
+	rootCmd.MarkFlagsMutuallyExclusive("second", "minute", "hour")
 
 	rootCmd.Flags().BoolVarP(&flagBeep, "beep", "b", false, "beep when finished sleeping")
 
 	rootCmd.Flags().StringVar(&flagColor, "color", "", "color of progress bar")
 	rootCmd.Flags().StringSliceVar(&flagGradient, "gradient", []string{"#005B72", "#1DD2FF"}, "apply a gradient between the two colors")
+	rootCmd.MarkFlagsMutuallyExclusive("color", "gradient")
 }
