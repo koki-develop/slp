@@ -16,6 +16,7 @@ var (
 	flagMinute bool
 	flagHour   bool
 	flagBeep   bool
+	flagColor  string
 )
 
 var rootCmd = &cobra.Command{
@@ -42,6 +43,7 @@ var rootCmd = &cobra.Command{
 
 		m := newModel(modelConfig{
 			Duration: time.Duration(t * float64(base)),
+			Color:    flagColor,
 		})
 		p := tea.NewProgram(m)
 
@@ -74,4 +76,6 @@ func init() {
 	rootCmd.Flags().BoolVar(&flagHour, "hour", false, "set the time unit to hours")
 
 	rootCmd.Flags().BoolVarP(&flagBeep, "beep", "b", false, "beep when finished sleeping")
+
+	rootCmd.Flags().StringVar(&flagColor, "color", "#00ADD8", "color of progress bar")
 }

@@ -31,13 +31,14 @@ type model struct {
 
 type modelConfig struct {
 	Duration time.Duration
+	Color    string
 }
 
 func newModel(cfg modelConfig) *model {
 	return &model{
 		duration: cfg.Duration,
 		abort:    false,
-		progress: progress.New(),
+		progress: progress.New(progress.WithSolidFill(cfg.Color)),
 		keymap: keymap{
 			Abort: key.NewBinding(key.WithKeys("ctrl+c")),
 		},
