@@ -97,6 +97,6 @@ func init() {
 	rootCmd.Flags().BoolVarP(&flagBeep, "beep", "b", false, "beep when finished sleeping")
 
 	rootCmd.Flags().StringVar(&flagColor, "color", "", "color of progress bar")
-	rootCmd.Flags().StringSliceVar(&flagGradient, "gradient", []string{"#005B72", "#1DD2FF"}, "apply a gradient between the two colors")
+	rootCmd.Flags().StringSliceVar(&flagGradient, "gradient", []string{"#005B72", "#83E6FF"}, "apply a gradient between the two colors")
 	rootCmd.MarkFlagsMutuallyExclusive("color", "gradient")
 }
