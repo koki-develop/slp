@@ -62,7 +62,7 @@ var rootCmd = &cobra.Command{
 			return err
 		}
 		if m.abort {
-			return errors.New("abort")
+			os.Exit(130)
 		}
 
 		if flagBeep {
