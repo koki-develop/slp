@@ -58,7 +58,7 @@ Flags:
 
 ```sh
 # e.g.
-$ slp 3 --gradient #000000,#ffffff
+$ slp 3 --gradient "#000000,#ffffff"
 ```
 
 ![](./docs/gradient.gif)
@@ -67,7 +67,7 @@ You can also set a single color with the `-color` flag.
 
 ```sh
 # e.g.
-$ slp 3 --color #ff0000
+$ slp 3 --color "#ff0000"
 ```
 
 ![](./docs/color.gif)
