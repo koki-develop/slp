@@ -1,4 +1,4 @@
-Output docs/gradient.gif
+Output assets/gradient.gif
 
 Set Shell "bash"
 Set FontSize 32

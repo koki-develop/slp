@@ -8,7 +8,7 @@
 
 sleep command with rich progress bar.
 
-![demo](./docs/demo.gif)
+![demo](./assets/demo.gif)
 
 ## Contents
 
@@ -44,7 +44,7 @@ $ slp [time]
 $ slp 3
 ```
 
-![](./docs/demo.gif)
+![](./assets/demo.gif)
 
 ### Customize Color
 
@@ -55,7 +55,7 @@ $ slp 3
 $ slp 3 --gradient "#000000,#ffffff"
 ```
 
-![](./docs/gradient.gif)
+![](./assets/gradient.gif)
 
 You can also set a single color with the `-color` flag.
 
@@ -64,7 +64,7 @@ You can also set a single color with the `-color` flag.
 $ slp 3 --color "#ff0000"
 ```
 
-![](./docs/color.gif)
+![](./assets/color.gif)
 
 ## LICENSE
 

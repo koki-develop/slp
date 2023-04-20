@@ -1,4 +1,4 @@
-Output docs/color.gif
+Output assets/color.gif
 
 Set Shell "bash"
 Set FontSize 32
