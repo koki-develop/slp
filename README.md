@@ -10,6 +10,8 @@ sleep command with rich progress bar.
 
 ![demo](./docs/demo.gif)
 
+## Contents
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [LICENSE](#license)
@@ -34,23 +36,15 @@ Download the binary from the [releases page](https://github.com/koki-develop/slp
 
 ## Usage
 
-```console
-$ slp --help
-sleep command with rich progress bar.
+### Basic
 
-Usage:
-  slp [time] [flags]
-
-Flags:
-      --second             set the time unit to seconds (default)
-      --minute             set the time unit to minutes
-      --hour               set the time unit to hours
-  -b, --beep               beep when finished sleeping
-      --color string       color of progress bar
-      --gradient strings   apply a gradient between the two colors (default [#005B72,#1DD2FF])
-  -h, --help               help for slp
-  -v, --version            version for slp
+```sh
+$ slp [time]
+# e.g.
+$ slp 3
 ```
+
+![](./docs/demo.gif)
 
 ### Customize Color
 
