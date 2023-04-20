@@ -30,22 +30,17 @@ var rootCmd = &cobra.Command{
 	Args:         cobra.ExactArgs(1),
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		t, err := strconv.ParseFloat(args[0], 64)
-		if err != nil {
-			return err
+		var d time.Duration
+		if sec, err := strconv.ParseFloat(args[0], 64); err == nil {
+			d = time.Duration(sec * float64(time.Second))
+		} else {
+			d, err = time.ParseDuration(args[0])
+			if err != nil {
+				return err
+			}
 		}
 
-		base := time.Second
-		switch {
-		case flagSecond:
-			base = time.Second
-		case flagMinute:
-			base = time.Minute
-		case flagHour:
-			base = time.Hour
-		}
-
-		cfg := modelConfig{Duration: time.Duration(t * float64(base))}
+		cfg := modelConfig{Duration: d}
 		if cmd.Flags().Changed("color") {
 			cfg.Color = flagColor
 		} else {
@@ -58,7 +53,7 @@ var rootCmd = &cobra.Command{
 		m := newModel(cfg)
 		p := tea.NewProgram(m)
 
-		if _, err = p.Run(); err != nil {
+		if _, err := p.Run(); err != nil {
 			return err
 		}
 		if m.abort {
