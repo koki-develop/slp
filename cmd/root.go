@@ -58,7 +58,7 @@ var rootCmd = &cobra.Command{
 		}
 
 		if flagBeep {
-			fmt.Print("\a")
+			fmt.Fprint(os.Stderr, "\a")
 		}
 		return nil
 	},
