@@ -76,8 +76,7 @@ func (m *model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case sleptMsg:
 		return m, tea.Quit
 	case tickMsg:
-		d := time.Since(m.startAt)
-		cmd := m.progress.SetPercent(float64(d) / float64(m.duration))
+		cmd := m.progress.SetPercent(float64(time.Since(m.startAt)) / float64(m.duration))
 		return m, tea.Batch(cmd, m.tick())
 	case progress.FrameMsg:
 		pm, cmd := m.progress.Update(msg)
