@@ -37,7 +37,10 @@ type modelConfig struct {
 }
 
 func newModel(cfg modelConfig) *model {
-	opts := []progress.Option{progress.WithSolidFill(cfg.Color)}
+	opts := []progress.Option{}
+	if cfg.Color != "" {
+		opts = append(opts, progress.WithSolidFill(cfg.Color))
+	}
 	if len(cfg.Gradient) == 2 {
 		opts = append(opts, progress.WithGradient(cfg.Gradient[0], cfg.Gradient[1]))
 	}
