@@ -13,6 +13,13 @@ jobs:
           go-version-file: go.mod
       - run: go build .
 
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: goreleaser/goreleaser-action@5fdedb94abba051217030cc86d4523cf3f02243d # v4.6.0
+        with:
+          args: check
+
   lint:
     runs-on: ubuntu-latest
     steps:
