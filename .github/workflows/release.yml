@@ -1,5 +1,7 @@
 name: release
 
+permissions: {}
+
 on:
   push:
     branches:
@@ -8,6 +10,7 @@ on:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: write # for create a release
       pull-requests: write # for open a pull request
@@ -25,12 +28,14 @@ jobs:
     needs: release-please
     if: ${{ needs.release-please.outputs.should-release == 'true' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: write # for upload release assets
     steps:
       - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: ./.github/actions/setup
       - run: goreleaser release --clean
