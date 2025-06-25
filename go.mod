@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/charmbracelet/bubbles v0.15.0
 	github.com/charmbracelet/bubbletea v0.23.2
-	github.com/mattn/go-runewidth v0.0.14
+	github.com/mattn/go-runewidth v0.0.16
 	github.com/spf13/cobra v1.7.0
 )
 
