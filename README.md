@@ -2,7 +2,6 @@
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/koki-develop/slp)](https://github.com/koki-develop/slp/releases/latest)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/koki-develop/slp/ci.yml?logo=github)](https://github.com/koki-develop/slp/actions/workflows/ci.yml)
-[![Maintainability](https://img.shields.io/codeclimate/maintainability/koki-develop/slp?style=flat&logo=codeclimate)](https://codeclimate.com/github/koki-develop/slp/maintainability)
 [![Go Report Card](https://goreportcard.com/badge/github.com/koki-develop/slp)](https://goreportcard.com/report/github.com/koki-develop/slp)
 [![LICENSE](https://img.shields.io/github/license/koki-develop/slp)](./LICENSE)
 
